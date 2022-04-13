@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">RugShop</string>
+    <string name="name">Name</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="registration">Register</string>
+    <string name="user_name">Username</string>
+    <string name="email_address">E-mail address</string>
+    <string name="password_again">Confirm password</string>
+    <string name="cancel">Cancel</string>
+    <string name="phone_number">Phone number</string>
+    <string name="address">Address</string>
+    <string name="account_type">Account type</string>
+    <string name="customer">Customer</string>
+    <string name="seller">Seller</string>
+    <string name="product_description">Product description</string>
+    <string name="loginAnon">Login anonymously</string>
+    <string-array name="phone_labels">
+        <item>Home</item>
+        <item>Work</item>
+        <item>Mobile</item>
+        <item>Other</item>
+    </string-array>
+</resources>
