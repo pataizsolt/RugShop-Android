@@ -49,4 +49,32 @@ public class Carpet {
     public Integer getImageResource() {
         return imageResource;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setWidth(Integer width) {
+        this.width = width;
+    }
+
+    public void setLength(Integer length) {
+        this.length = length;
+    }
+
+    public void setPrice(Integer price) {
+        this.price = price;
+    }
+
+    public void setImageResource(Integer imageResource) {
+        this.imageResource = imageResource;
+    }
 }

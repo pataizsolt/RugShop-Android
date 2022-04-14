@@ -1,20 +1,20 @@
 {
   "project_info": {
-    "project_number": "355955709382",
-    "project_id": "rugshop-f3fb1",
-    "storage_bucket": "rugshop-f3fb1.appspot.com"
+    "project_number": "484980013587",
+    "project_id": "rugshop-a8eb2",
+    "storage_bucket": "rugshop-a8eb2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:355955709382:android:8f958f2e390739bf10cec7",
+        "mobilesdk_app_id": "1:484980013587:android:ffd8510fd2303fbf825de6",
         "android_client_info": {
           "package_name": "com.mobileapp.rugshop"
         }
       },
       "oauth_client": [
         {
-          "client_id": "355955709382-r2sa1hommqsh0h54bdnjm11bbv8kfpt3.apps.googleusercontent.com",
+          "client_id": "484980013587-gvd3qnra61c1c2h0al91s2trl1vg37bl.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.mobileapp.rugshop",
@@ -22,20 +22,20 @@
           }
         },
         {
-          "client_id": "355955709382-1fdqckloi2rg2vf9ikeepf1cphprviqi.apps.googleusercontent.com",
+          "client_id": "484980013587-jql8g2q2t7d6qe7nqnel2eocc9hmh45q.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDPGaj4Mt9D0lajI2zSNR6421ZLqsb8Nm4"
+          "current_key": "AIzaSyA0uuxAAR6wFITdHQSZEIOnj_D7vKMiBGA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "355955709382-1fdqckloi2rg2vf9ikeepf1cphprviqi.apps.googleusercontent.com",
+              "client_id": "484980013587-jql8g2q2t7d6qe7nqnel2eocc9hmh45q.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

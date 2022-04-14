@@ -1,8 +1,6 @@
 package com.mobileapp.rugshop.adapter;
 
 import android.content.Context;
-import android.util.Log;
-import android.view.ContentInfo;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,107 +9,141 @@ import android.view.animation.AnimationUtils;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.mobileapp.rugshop.ItemListActivity;
 import com.mobileapp.rugshop.R;
 import com.mobileapp.rugshop.model.Carpet;
 
 import java.util.ArrayList;
-import java.util.Locale;
+import java.util.EventListener;
 
-public class CarpetAdapter extends RecyclerView.Adapter<CarpetAdapter.ViewHolder> implements Filterable {
-    private ArrayList<Carpet> mCarpetData;
-    private ArrayList<Carpet> mCarpetDataAll;
+public class CarpetAdapter
+        extends RecyclerView.Adapter<CarpetAdapter.ViewHolder>
+        implements Filterable {
+    // Member variables.
+    private ArrayList<Carpet> mShoppingData;
+    private ArrayList<Carpet> mSoppingDataAll;
     private Context mContext;
     private int lastPosition = -1;
 
-    public CarpetAdapter(Context context, ArrayList<Carpet> itemData){
-        this.mCarpetData=itemData;
-        this.mCarpetDataAll=itemData;
-        this.mContext=context;
-
+    CarpetAdapter(Context context, ArrayList<Carpet> itemsData) {
+        this.mShoppingData = itemsData;
+        this.mSoppingDataAll = itemsData;
+        this.mContext = context;
     }
 
-    @NonNull
     @Override
-    public CarpetAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(mContext).inflate(R.layout.element,parent,false));
+    public CarpetAdapter.ViewHolder onCreateViewHolder(
+            ViewGroup parent, int viewType) {
+        return new ViewHolder(LayoutInflater.from(mContext)
+                .inflate(R.layout.element, parent, false));
     }
 
     @Override
     public void onBindViewHolder(CarpetAdapter.ViewHolder holder, int position) {
-        Carpet currentCarpet =  mCarpetData.get(position);
+        // Get current sport.
+        Carpet currentItem = mShoppingData.get(position);
 
-        holder.bindTo(currentCarpet);
+        // Populate the textviews with data.
+        holder.bindTo(currentItem);
+
+
+        if(holder.getAdapterPosition() > lastPosition) {
+            Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.slide_in_row);
+            holder.itemView.startAnimation(animation);
+            lastPosition = holder.getAdapterPosition();
+        }
     }
 
     @Override
     public int getItemCount() {
-        return mCarpetData.size();
+        return mShoppingData.size();
     }
 
+
+    /**
+     * RecycleView filter
+     * **/
     @Override
     public Filter getFilter() {
-        return carpetFilter;
+        return shoppingFilter;
     }
 
-    private Filter carpetFilter = new Filter() {
+    private Filter shoppingFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence charSequence) {
-            ArrayList<Carpet> filteredCarpetList = new ArrayList<>();
+            ArrayList<Carpet> filteredList = new ArrayList<>();
             FilterResults results = new FilterResults();
 
-            if (charSequence == null || charSequence.length() == 0) {
-                results.count = mCarpetDataAll.size();
-                results.values = mCarpetDataAll;
+            if(charSequence == null || charSequence.length() == 0) {
+                results.count = mSoppingDataAll.size();
+                results.values = mSoppingDataAll;
             } else {
                 String filterPattern = charSequence.toString().toLowerCase().trim();
-                for (Carpet c : mCarpetDataAll) {
-                    if (c.getName().toLowerCase().contains(filterPattern)) {
-                        filteredCarpetList.add(c);
+                for(Carpet item : mSoppingDataAll) {
+                    if(item.getName().toLowerCase().contains(filterPattern)){
+                        filteredList.add(item);
                     }
                 }
-                results.count = filteredCarpetList.size();
-                results.values = filteredCarpetList;
+
+                results.count = filteredList.size();
+                results.values = filteredList;
             }
+
             return results;
         }
 
         @Override
         protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-            mCarpetData = (ArrayList) filterResults.values;
+            mShoppingData = (ArrayList)filterResults.values;
             notifyDataSetChanged();
         }
     };
 
-    class ViewHolder extends RecyclerView.ViewHolder{
-        private ImageView mImageView;
-        private TextView mNameView;
-        private TextView mDescriptionView;
-        private TextView mPriceView;
+    class ViewHolder extends RecyclerView.ViewHolder {
+        private TextView carpetName;
+        private TextView carpetDescription;
+        private TextView price;
 
-
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
-            mImageView = itemView.findViewById(R.id.carpetImage);
-            mNameView = itemView.findViewById(R.id.carpetName);
-            mDescriptionView =itemView.findViewById(R.id.carpetDescription);
-            mPriceView =itemView.findViewById(R.id.price);
 
-            itemView.findViewById(R.id.add_to_cart).setOnClickListener(view -> ((ItemListActivity)mContext).updateAlertIcon());
+            // Initialize the views.
+            carpetName = itemView.findViewById(R.id.carpetName);
+            carpetDescription = itemView.findViewById(R.id.carpetDescription);
+            price = itemView.findViewById(R.id.price);
+
+            //itemView.findViewById(R.id.add_to_cart).setOnClickListener(view -> ((ItemListActivity)mContext).updateAlertIcon());
         }
 
-        public void bindTo(Carpet currentCarpet) {
-            mNameView.setText(currentCarpet.getName());
-            //mDescriptionView.setText("Color: "+currentCarpet.getColor()+" Type: "+currentCarpet.getType()+" Dimensions: "+currentCarpet.getWidth()+"x"+currentCarpet.getLength());
-            mPriceView.setText(currentCarpet.getPrice());
+        void bindTo(Carpet currentItem){
+            carpetName.setText(currentItem.getName());
+            carpetDescription.setText("Type: "+currentItem.getType()+"\nColor: "+currentItem.getColor()+"\nDimensions: "+currentItem.getWidth()+"cm x "+currentItem.getLength()+"cm");
+            price.setText(currentItem.getPrice()+" EUR");
 
-            //Glide.with(mContext).load(currentCarpet.getImageResource()).into(mImageView);
+            // Load the images into the ImageView using the Glide library.
+            //Glide.with(mContext).load(currentItem.getImageResource()).into(mItemImage);
         }
     }
+    /*private class CarpetViewHolder extends RecyclerView.ViewHolder{
+        private TextView carpetName;
+        private TextView carpetDescription;
+        private TextView price;
+
+        public CarpetViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            carpetName = itemView.findViewById(R.id.carpetName);
+            carpetDescription = itemView.findViewById(R.id.carpetDescription);
+            price = itemView.findViewById(R.id.price);
+        }
+    }*/
 }
+
