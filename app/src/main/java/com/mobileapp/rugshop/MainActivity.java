@@ -29,7 +29,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = MainActivity.class.getName();
     private static final String PREF_KEY = MainActivity.class.getPackage().toString();
-    private static final int RC_SIGN_IN = 123;
+
     // private static final int SECRET_KEY = 99;
 
     EditText userNameET;

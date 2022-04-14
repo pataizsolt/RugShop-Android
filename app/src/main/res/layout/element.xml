@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/carpetImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true" />
+
+        <TextView
+            android:id="@+id/carpetName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/carpetImage"
+            android:padding="8dp"
+            android:text="placeholder"
+            android:textColor="?android:textColorSecondary" />
+
+
+        <TextView
+            android:id="@+id/carpetDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/carpetName"
+            android:padding="8dp"
+            android:text="placeholder" />
+
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/carpetDescription"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="12dp"
+            android:padding="8dp"
+            android:text="placeholder" />
+
+        <Button
+            android:id="@+id/add_to_cart"
+            style="@style/myButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/price"
+            android:layout_centerHorizontal="true"
+            android:text="Add to basket" />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

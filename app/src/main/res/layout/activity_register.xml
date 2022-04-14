@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp">
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -35,55 +39,55 @@
         android:id="@+id/userEmailEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/register_margin_top"
+        android:layout_below="@id/userNameEditText"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginLeft="@dimen/default_margin_side"
+        android:layout_marginTop="@dimen/register_margin_top"
         android:layout_marginRight="@dimen/default_margin_side"
         android:ems="10"
         android:hint="@string/email_address"
-        android:inputType="textEmailAddress"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@id/userNameEditText"/>
+        android:inputType="textEmailAddress" />
 
     <EditText
         android:id="@+id/passwordEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/register_margin_top"
+        android:layout_below="@id/userEmailEditText"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginLeft="@dimen/default_margin_side"
+        android:layout_marginTop="@dimen/register_margin_top"
         android:layout_marginRight="@dimen/default_margin_side"
         android:ems="10"
         android:hint="@string/password"
-        android:inputType="textPassword"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@id/userEmailEditText"/>
+        android:inputType="textPassword" />
 
     <EditText
         android:id="@+id/passwordAgainEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/register_margin_top"
+        android:layout_below="@id/passwordEditText"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginLeft="@dimen/default_margin_side"
+        android:layout_marginTop="@dimen/register_margin_top"
         android:layout_marginRight="@dimen/default_margin_side"
         android:ems="10"
         android:hint="@string/password_again"
-        android:inputType="textPassword"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@id/passwordEditText"/>
+        android:inputType="textPassword" />
 
     <EditText
         android:id="@+id/phoneEditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/passwordAgainEditText"
         android:layout_marginLeft="@dimen/default_margin_side"
         android:layout_marginTop="@dimen/register_margin_top"
         android:layout_marginRight="@dimen/default_margin_side"
         android:ems="10"
         android:hint="@string/phone_number"
-        android:inputType="phone"
-        android:layout_below="@id/passwordAgainEditText"/>
+        android:inputType="phone" />
 
     <Spinner
         android:id="@+id/phoneSpinner"
@@ -153,16 +157,19 @@
         android:layout_centerHorizontal="true">
 
         <Button
+            style="@style/myButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/registration"
-            android:onClick="register"/>
+            android:onClick="register"
+            android:text="@string/registration" />
 
         <Button
+            style="@style/myButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="40dp"
-            android:text="@string/cancel"
-            android:onClick="cancel"/>
+            android:onClick="cancel"
+            android:text="@string/cancel" />
     </LinearLayout>
 </RelativeLayout>
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <item
+        android:id="@+id/search_bar"
+        android:title="Search"
+        android:icon="@drawable/ic_baseline_search_24"
+        app:showAsAction="always"
+        app:actionViewClass="android.widget.SearchView"
+    />
+    <item
+        android:id="@+id/cart"
+        android:title="Cart"
+        android:icon="@drawable/ic_baseline_shopping_cart_24"
+        app:showAsAction="always"
+        app:actionLayout="@layout/counter"
+
+        />
+    <item
+        android:id="@+id/viewswitch"
+        android:title="NightMode"
+        android:icon="@drawable/ic_baseline_nights_stay_24"
+        app:showAsAction="always"
+
+        />
+    <item
+        android:id="@+id/log_out"
+        android:title="Logout"
+        android:icon="@drawable/ic_baseline_exit_to_app_24"
+        app:showAsAction="always"
+        />
+</menu>
