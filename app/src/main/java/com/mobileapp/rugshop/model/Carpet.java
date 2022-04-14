@@ -1,6 +1,7 @@
 package com.mobileapp.rugshop.model;
 
 public class Carpet {
+    private String id;
     private String name;
     private String color;
     private String type;
@@ -8,8 +9,14 @@ public class Carpet {
     private Integer length;
     private Integer price;
     private Integer imageResource;
+    private Integer soldCounter;
+    private Integer stock;
 
     public Carpet() {
+    }
+
+    public Integer getSoldCounter() {
+        return soldCounter;
     }
 
     public Carpet(String name, String color, String type, Integer width, Integer length, Integer price, Integer imageResource) {
@@ -20,6 +27,8 @@ public class Carpet {
         this.length = length;
         this.price = price;
         this.imageResource = imageResource;
+        this.soldCounter = 0;
+        this.stock=10;
     }
 
     public String getName() {
@@ -76,5 +85,13 @@ public class Carpet {
 
     public void setImageResource(Integer imageResource) {
         this.imageResource = imageResource;
+    }
+
+    public String _getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

@@ -27,6 +27,18 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
 public class MainActivity extends AppCompatActivity {
+    /*TODO
+    *  UjItemKerveny
+    * Create UjItem mystery szonyeg felvetele
+    * Read Listazas, search
+    * Update Novelni es csokkenteni lehet a darabszamot
+    * Delete ha elfogy a stock eltunik
+    *
+    * NOTIFICATION GYERE VEGYEL SZONYEGET!
+    *
+    *
+    *
+    * */
     private static final String LOG_TAG = MainActivity.class.getName();
     private static final String PREF_KEY = MainActivity.class.getPackage().toString();
 

@@ -33,7 +33,7 @@ public class CarpetAdapter
     private Context mContext;
     private int lastPosition = -1;
 
-    CarpetAdapter(Context context, ArrayList<Carpet> itemsData) {
+    public CarpetAdapter(Context context, ArrayList<Carpet> itemsData) {
         this.mShoppingData = itemsData;
         this.mSoppingDataAll = itemsData;
         this.mContext = context;

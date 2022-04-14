@@ -11,14 +11,6 @@
         app:actionViewClass="android.widget.SearchView"
     />
     <item
-        android:id="@+id/cart"
-        android:title="Cart"
-        android:icon="@drawable/ic_baseline_shopping_cart_24"
-        app:showAsAction="always"
-        app:actionLayout="@layout/counter"
-
-        />
-    <item
         android:id="@+id/viewswitch"
         android:title="NightMode"
         android:icon="@drawable/ic_baseline_nights_stay_24"
