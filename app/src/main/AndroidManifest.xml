@@ -10,10 +10,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RugShop">
         <activity
-            android:name=".ItemListActivity"
+            android:name=".NewCarpetActivity"
             android:exported="false" />
         <activity
-            android:name=".ItemListActivitya"
+            android:name=".CarpetListActivity"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"

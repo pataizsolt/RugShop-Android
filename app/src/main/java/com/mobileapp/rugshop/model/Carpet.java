@@ -19,16 +19,29 @@ public class Carpet {
         return soldCounter;
     }
 
-    public Carpet(String name, String color, String type, Integer width, Integer length, Integer price, Integer imageResource) {
+    public Carpet(String name, String color, String type, Integer width, Integer length, Integer price, Integer stock, Integer imageResource) {
         this.name = name;
         this.color = color;
         this.type = type;
         this.width = width;
         this.length = length;
         this.price = price;
-        this.imageResource = imageResource;
         this.soldCounter = 0;
-        this.stock=10;
+        this.stock = stock;
+        this.imageResource = imageResource;
+    }
+
+    public Carpet(String name, String color, String type, Integer width, Integer length, Integer price, Integer stock) {
+        this.name = name;
+        this.color = color;
+        this.type = type;
+        this.width = width;
+        this.length = length;
+        this.price = price;
+        this.soldCounter = 0;
+        this.stock = stock;
+        this.imageResource = 0;
+
     }
 
     public String getName() {
@@ -65,6 +78,10 @@ public class Carpet {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public Integer getStock() {
+        return stock;
     }
 
     public void setType(String type) {

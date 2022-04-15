@@ -9,20 +9,16 @@ import android.view.animation.AnimationUtils;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.mobileapp.rugshop.ItemListActivity;
+import com.mobileapp.rugshop.CarpetListActivity;
 import com.mobileapp.rugshop.R;
 import com.mobileapp.rugshop.model.Carpet;
 
 import java.util.ArrayList;
-import java.util.EventListener;
 
 public class CarpetAdapter
         extends RecyclerView.Adapter<CarpetAdapter.ViewHolder>
@@ -111,6 +107,8 @@ public class CarpetAdapter
         private TextView carpetName;
         private TextView carpetDescription;
         private TextView price;
+        private TextView count;
+        private ImageView mCarpetImage;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -119,17 +117,23 @@ public class CarpetAdapter
             carpetName = itemView.findViewById(R.id.carpetName);
             carpetDescription = itemView.findViewById(R.id.carpetDescription);
             price = itemView.findViewById(R.id.price);
+            count = itemView.findViewById(R.id.count);
+            mCarpetImage = itemView.findViewById(R.id.carpetImage);
 
-            //itemView.findViewById(R.id.add_to_cart).setOnClickListener(view -> ((ItemListActivity)mContext).updateAlertIcon());
+
+            //itemView.findViewById(R.id.add_to_cart).setOnClickListener(view -> ((CarpetListActivity)mContext).updateAlertIcon());
         }
 
-        void bindTo(Carpet currentItem){
-            carpetName.setText(currentItem.getName());
-            carpetDescription.setText("Type: "+currentItem.getType()+"\nColor: "+currentItem.getColor()+"\nDimensions: "+currentItem.getWidth()+"cm x "+currentItem.getLength()+"cm");
-            price.setText(currentItem.getPrice()+" EUR");
+        void bindTo(Carpet currentCarpet){
+            carpetName.setText(currentCarpet.getName());
+            carpetDescription.setText("Type: "+currentCarpet.getType()+"\nColor: "+currentCarpet.getColor()+"\nDimensions: "+currentCarpet.getWidth()+"cm x "+currentCarpet.getLength()+"cm");
+            price.setText(currentCarpet.getPrice()+" EUR");
+            count.setText("Avaliable: "+currentCarpet.getStock());
+
+            itemView.findViewById(R.id.add_to_cart).setOnClickListener(view -> ((CarpetListActivity)mContext).updateCarpet(currentCarpet));
 
             // Load the images into the ImageView using the Glide library.
-            //Glide.with(mContext).load(currentItem.getImageResource()).into(mItemImage);
+            Glide.with(mContext).load(currentCarpet.getImageResource()).into(mCarpetImage);
         }
     }
     /*private class CarpetViewHolder extends RecyclerView.ViewHolder{

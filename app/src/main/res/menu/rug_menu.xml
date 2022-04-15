@@ -7,20 +7,27 @@
         android:id="@+id/search_bar"
         android:title="Search"
         android:icon="@drawable/ic_baseline_search_24"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
         app:actionViewClass="android.widget.SearchView"
     />
     <item
         android:id="@+id/viewswitch"
         android:title="NightMode"
         android:icon="@drawable/ic_baseline_nights_stay_24"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
+
+        />
+    <item
+        android:id="@+id/newCarpet"
+        android:title="Request new carpet"
+        android:icon="@drawable/ic_baseline_plus_one_24"
+        app:showAsAction="ifRoom"
 
         />
     <item
         android:id="@+id/log_out"
         android:title="Logout"
         android:icon="@drawable/ic_baseline_exit_to_app_24"
-        app:showAsAction="always"
+        app:showAsAction="ifRoom"
         />
 </menu>

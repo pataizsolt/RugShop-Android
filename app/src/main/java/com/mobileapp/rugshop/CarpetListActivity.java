@@ -1,29 +1,21 @@
 package com.mobileapp.rugshop;
 
-import static android.app.UiModeManager.MODE_NIGHT_NO;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.SharedPreferences;
+import android.content.Intent;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.SearchView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -31,13 +23,14 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.Source;
 import com.mobileapp.rugshop.adapter.CarpetAdapter;
 import com.mobileapp.rugshop.model.Carpet;
 
 import java.util.ArrayList;
 
-public class ItemListActivity extends AppCompatActivity {
-    private static final String LOG_TAG = ItemListActivity.class.getName();
+public class CarpetListActivity extends AppCompatActivity {
+    private static final String LOG_TAG = CarpetListActivity.class.getName();
     private FirebaseUser user;
 
     private RecyclerView mRecyclerView;
@@ -90,6 +83,10 @@ public class ItemListActivity extends AppCompatActivity {
 
     }
     private void queryData() {
+//        TypedArray itemsImageResources = getResources().obtainTypedArray(R.array.carpets);
+//        for (int i = 0; i < itemsImageResources.length(); i++) {
+//            Log.d(LOG_TAG,itemsImageResources.getResourceId(i, 0)+" carpet"+i);
+//        }
         mCarpetData.clear();
         mCarpets.orderBy("soldCounter", Query.Direction.DESCENDING).limit(itemLimit).get().addOnSuccessListener(queryDocumentSnapshots -> {
             for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
@@ -99,9 +96,10 @@ public class ItemListActivity extends AppCompatActivity {
             }
 
             if (mCarpetData.size() == 0) {
-                mCarpets.add(new Carpet("nev","SZINES","FASZASZONYEG",234,2344,54,3));
-                mCarpets.add(new Carpet("A KURVA ISTEN MEGBASSZA HOGY MUKODIK AZ ANYJA IS","asd","d",233333333,2344,54,3));
+                mCarpets.add(new Carpet("nev","SZINES","FASZASZONYEG",234,2344,54,3,2131230921));
+                mCarpets.add(new Carpet("A KURVA ISTEN MEGBASSZA HOGY MUKODIK AZ ANYJA IS","asd","d",233333333,2344,54,3,2131230921));
                 queryData();
+
             }
 
             // Notify the adapter of the change.
@@ -118,6 +116,17 @@ public class ItemListActivity extends AppCompatActivity {
             Toast.makeText(this,"Carpet "+ carpet._getId() +" cannot be deleted", Toast.LENGTH_LONG).show();
         });
 
+
+    }
+    public void updateCarpet(Carpet carpet){
+        mCarpets.document(carpet._getId()).update("stock", carpet.getStock()-1).addOnFailureListener(failure ->
+        {
+            Toast.makeText(this,carpet.getName() +" bought!", Toast.LENGTH_LONG).show();
+        });
+        if(carpet.getStock()-1<=0){
+            //mCarpets.document(carpet._getId()).delete();
+            deleteCarpet(carpet);
+        }
         queryData();
     }
 
@@ -150,11 +159,6 @@ public class ItemListActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.search_bar:
-                Log.d(LOG_TAG, "Logout clicked!");
-                FirebaseAuth.getInstance().signOut();
-                finish();
-                return true;
             case R.id.viewswitch:
                 Log.d(LOG_TAG, "Viewswitch clicked!");
                 if(AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_NO){
@@ -164,14 +168,28 @@ public class ItemListActivity extends AppCompatActivity {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                 }
                 return true;
+            case R.id.newCarpet:
+                Log.d(LOG_TAG, "New carpet clicked!");
+                newCarpet();
+                return true;
             case R.id.log_out:
                 Log.d(LOG_TAG, "Logging out!");
                 FirebaseAuth.getInstance().signOut();
                 finish();
+                login();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
+
+    public void newCarpet() {
+        Intent intent = new Intent(this, NewCarpetActivity.class);
+        startActivity(intent);
+    }
+    private void login(){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 }

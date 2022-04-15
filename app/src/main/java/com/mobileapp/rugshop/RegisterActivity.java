@@ -108,8 +108,8 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                     Log.d(LOG_TAG, "User created successfully");
                     startShopping();
                 } else {
-                    Log.d(LOG_TAG, "User was't created successfully:", task.getException());
-                    Toast.makeText(RegisterActivity.this, "User was't created successfully:", Toast.LENGTH_LONG).show();
+                    Log.d(LOG_TAG, "User wasn't created successfully:", task.getException());
+                    Toast.makeText(RegisterActivity.this, "User wasn't created successfully:", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -120,7 +120,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     }
 
     private void startShopping(/* registered used class */) {
-        Intent intent = new Intent(this, ItemListActivity.class);
+        Intent intent = new Intent(this, CarpetListActivity.class);
         intent.putExtra("SECRET_KEY", SECRET_KEY);
         startActivity(intent);
     }

@@ -16,10 +16,38 @@
     <string name="product_description">Product description</string>
     <string name="loginAnon">Login anonymously</string>
     <string name="buy_now">buy now!</string>
+    <string name="carpetType">Type of the carpet</string>
+    <string name="colorOfCarpet">Color of the carpet</string>
+    <string name="carpetName">Carpet name</string>
+    <string name="newCarpet">New carpet request</string>
+    <string name="request">Request new carpet</string>
+    <string name="length">Length</string>
+    <string name="width">Width</string>
+    <string name="stock">Required stock</string>
+    <string name="price">Price</string>
+    <string name="placeholder">placeholder</string>
     <string-array name="phone_labels">
         <item>Home</item>
         <item>Work</item>
         <item>Mobile</item>
         <item>Other</item>
     </string-array>
+
+    <array name="carpets">
+        <item>@drawable/carpet1</item>
+        <item>@drawable/carpet2</item>
+        <item>@drawable/carpet3</item>
+        <item>@drawable/carpet4</item>
+        <item>@drawable/carpet5</item>
+        <item>@drawable/carpet6</item>
+    </array>
+    <string-array name="carpets_with_ids">
+        <item>2131230916 carpet0</item>
+        <item>2131230917 carpet1</item>
+        <item>2131230918 carpet2</item>
+        <item>2131230919 carpet3</item>
+        <item>2131230920 carpet4</item>
+        <item>2131230921 carpet5</item>
+    </string-array>
+
 </resources>
