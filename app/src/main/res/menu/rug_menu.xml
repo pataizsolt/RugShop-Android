@@ -12,7 +12,7 @@
     />
     <item
         android:id="@+id/viewswitch"
-        android:title="NightMode"
+        android:title="Nightmode"
         android:icon="@drawable/ic_baseline_nights_stay_24"
         app:showAsAction="ifRoom"
 

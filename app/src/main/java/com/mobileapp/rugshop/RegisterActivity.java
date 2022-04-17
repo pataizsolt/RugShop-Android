@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -27,7 +28,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     private static final int SECRET_KEY = 99;
 
     EditText userNameEditText;
-    EditText userEmailEditText;
+    EditText eMailAddressEditText;
     EditText passwordEditText;
     EditText passwordConfirmEditText;
     EditText phoneEditText;
@@ -52,35 +53,35 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             finish();
         }*/
 
-        userNameEditText = findViewById(R.id.userNameEditText);
-        userEmailEditText = findViewById(R.id.userEmailEditText);
+        //userNameEditText = findViewById(R.id.userNameEditText);
+        eMailAddressEditText = findViewById(R.id.userEmailEditText);
         passwordEditText = findViewById(R.id.passwordEditText);
         passwordConfirmEditText = findViewById(R.id.passwordAgainEditText);
-        phoneEditText = findViewById(R.id.phoneEditText);
-        spinner = findViewById(R.id.phoneSpinner);
-        accountTypeGroup = findViewById(R.id.accountTypeGroup);
-        accountTypeGroup.check(R.id.buyer);
+        //phoneEditText = findViewById(R.id.phoneEditText);
+        //spinner = findViewById(R.id.phoneSpinner);
+        //accountTypeGroup = findViewById(R.id.accountTypeGroup);
+        //accountTypeGroup.check(R.id.buyer);
 
         preferences = getSharedPreferences(PREF_KEY, MODE_PRIVATE);
-        String userName = preferences.getString("userName", "");
+        String email = preferences.getString("email", "");
         String password = preferences.getString("password", "");
 
-        userNameEditText.setText(userName);
+        eMailAddressEditText.setText(email);
         passwordEditText.setText(password);
         passwordConfirmEditText.setText(password);
 
-        spinner.setOnItemSelectedListener(this);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.phone_labels, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        //spinner.setOnItemSelectedListener(this);
+        //ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+        //        R.array.phone_labels, android.R.layout.simple_spinner_item);
+        //adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //spinner.setAdapter(adapter);
 
         Log.i(LOG_TAG, "onCreate");
     }
 
     public void register(View view) {
-        String userName = userNameEditText.getText().toString();
-        String email = userEmailEditText.getText().toString();
+        //String userName = userNameEditText.getText().toString();
+        String email = eMailAddressEditText.getText().toString();
         String password = passwordEditText.getText().toString();
         String passwordConfirm = passwordConfirmEditText.getText().toString();
 
@@ -89,15 +90,28 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             return;
         }
 
-        String phone = phoneEditText.getText().toString();
-        String phoneType = spinner.getSelectedItem().toString();
+        if(TextUtils.isEmpty(email)) {
+            eMailAddressEditText.setError("Cannot be empty");
+            return;
+        }
+        if(TextUtils.isEmpty(password)) {
+            passwordEditText.setError("Cannot be empty");
+            return;
+        }
+        if(TextUtils.isEmpty(passwordConfirm)) {
+            passwordConfirmEditText.setError("Cannot be empty");
+            return;
+        }
 
-        int accountTypeId = accountTypeGroup.getCheckedRadioButtonId();
-        View radioButton = accountTypeGroup.findViewById(accountTypeId);
-        int id = accountTypeGroup.indexOfChild(radioButton);
-        String accountType =  ((RadioButton)accountTypeGroup.getChildAt(id)).getText().toString();
+        //String phone = phoneEditText.getText().toString();
+        //String phoneType = spinner.getSelectedItem().toString();
 
-        Log.i(LOG_TAG, "Regisztrált: " + userName + ", e-mail: " + email);
+        //int accountTypeId = accountTypeGroup.getCheckedRadioButtonId();
+        //View radioButton = accountTypeGroup.findViewById(accountTypeId);
+        //int id = accountTypeGroup.indexOfChild(radioButton);
+        //String accountType =  ((RadioButton)accountTypeGroup.getChildAt(id)).getText().toString();
+
+        //Log.i(LOG_TAG, "Regisztrált: " + userName + ", e-mail: " + email);
         // startShopping();
         // TODO: A regisztrációs funkcionalitást meg kellene valósítani egyszer.
 
@@ -123,42 +137,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         Intent intent = new Intent(this, CarpetListActivity.class);
         intent.putExtra("SECRET_KEY", SECRET_KEY);
         startActivity(intent);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.i(LOG_TAG, "onStart");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.i(LOG_TAG, "onStop");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.i(LOG_TAG, "onDestroy");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.i(LOG_TAG, "onPause");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.i(LOG_TAG, "onResume");
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        Log.i(LOG_TAG, "onRestart");
     }
 
     @Override

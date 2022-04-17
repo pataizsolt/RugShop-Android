@@ -37,14 +37,14 @@ public class CarpetListActivity extends AppCompatActivity {
     private ArrayList<Carpet> mCarpetData;
     private CarpetAdapter mAdapter;
     private Integer itemLimit = 5;
+    private boolean bestsellerOrNah = false;
 
 
 
+    private NotificationHandler mNotificationHandler;
 
     private FirebaseFirestore mFirestore;
     private CollectionReference mCarpets;
-
-    private boolean viewRow = true;
 
 
     @Override
@@ -72,23 +72,21 @@ public class CarpetListActivity extends AppCompatActivity {
 
         mFirestore = FirebaseFirestore.getInstance();
         mCarpets = mFirestore.collection("Carpets");
+
+        mNotificationHandler = new NotificationHandler(this);
+
+
         queryData();
-
-
-
-
-
-
-
-
     }
-    private void queryData() {
-//        TypedArray itemsImageResources = getResources().obtainTypedArray(R.array.carpets);
-//        for (int i = 0; i < itemsImageResources.length(); i++) {
-//            Log.d(LOG_TAG,itemsImageResources.getResourceId(i, 0)+" carpet"+i);
-//        }
+
+    public void queryData(){
+        /*TypedArray itemsImageResources = getResources().obtainTypedArray(R.array.carpets);
+        for (int i = 0; i < itemsImageResources.length(); i++) {
+            Log.d(LOG_TAG,itemsImageResources.getResourceId(i, 0)+" carpet"+i);
+        }*/
         mCarpetData.clear();
-        mCarpets.orderBy("soldCounter", Query.Direction.DESCENDING).limit(itemLimit).get().addOnSuccessListener(queryDocumentSnapshots -> {
+
+        mCarpets.orderBy("name", Query.Direction.ASCENDING).limit(itemLimit).get().addOnSuccessListener(queryDocumentSnapshots -> {
             for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                 Carpet item = document.toObject(Carpet.class);
                 item.setId(document.getId());
@@ -96,16 +94,18 @@ public class CarpetListActivity extends AppCompatActivity {
             }
 
             if (mCarpetData.size() == 0) {
-                mCarpets.add(new Carpet("nev","SZINES","FASZASZONYEG",234,2344,54,3,2131230921));
-                mCarpets.add(new Carpet("A KURVA ISTEN MEGBASSZA HOGY MUKODIK AZ ANYJA IS","asd","d",233333333,2344,54,3,2131230921));
+                mCarpets.add(new Carpet("Antique carpet","blue/red","persian",120,200,140,3,2131230916));
+                mCarpets.add(new Carpet("Modern carpet","orange","futuristic",160,200,230,1,2131230917));
+                mCarpets.add(new Carpet("Simple carpet","khaki","basic",150,180,60,6,2131230918));
+                mCarpets.add(new Carpet("Artistic carpet","blue/white","handmade",140,200,3000,1,2131230919));
+                mCarpets.add(new Carpet("Traditional persian carpet","red","persian",130,200,400,2,2131230920));
                 queryData();
 
             }
-
-            // Notify the adapter of the change.
             mAdapter.notifyDataSetChanged();
         });
     }
+
 
     public void deleteCarpet(Carpet carpet){
         DocumentReference ref = mCarpets.document(carpet._getId());
@@ -118,21 +118,26 @@ public class CarpetListActivity extends AppCompatActivity {
 
 
     }
-    public void updateCarpet(Carpet carpet){
-        mCarpets.document(carpet._getId()).update("stock", carpet.getStock()-1).addOnFailureListener(failure ->
+    public void updateCarpet(Carpet carpet) throws InterruptedException {
+        mCarpets.document(carpet._getId()).update("stock", carpet.getStock()-1).addOnSuccessListener(success ->
         {
-            Toast.makeText(this,carpet.getName() +" bought!", Toast.LENGTH_LONG).show();
+            Log.d(LOG_TAG,carpet.getName() +" bought!");
         });
         if(carpet.getStock()-1<=0){
-            //mCarpets.document(carpet._getId()).delete();
             deleteCarpet(carpet);
         }
+        if(carpet.getStock()-1==1){
+            mNotificationHandler.send("Only 1 left of "+carpet.getName()+"! Get it now before it runs out!");
+            Log.d(LOG_TAG, "Only 1 left of "+carpet.getName());
+        }
+
+        mCarpets.document(carpet._getId()).update("soldCounter", carpet.getSoldCounter()+1).addOnFailureListener(failure ->
+        {
+            Log.d(LOG_TAG,carpet.getName() +" failed to increment!");
+        });
         queryData();
+
     }
-
-
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -183,7 +188,6 @@ public class CarpetListActivity extends AppCompatActivity {
         }
     }
 
-
     public void newCarpet() {
         Intent intent = new Intent(this, NewCarpetActivity.class);
         startActivity(intent);
@@ -192,4 +196,6 @@ public class CarpetListActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+
 }

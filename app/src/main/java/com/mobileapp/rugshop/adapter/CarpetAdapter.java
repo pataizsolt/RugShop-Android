@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.Target;
 import com.mobileapp.rugshop.CarpetListActivity;
 import com.mobileapp.rugshop.R;
 import com.mobileapp.rugshop.model.Carpet;
@@ -27,7 +28,7 @@ public class CarpetAdapter
     private ArrayList<Carpet> mShoppingData;
     private ArrayList<Carpet> mSoppingDataAll;
     private Context mContext;
-    private int lastPosition = -1;
+    private int lastPosition = -100;
 
     public CarpetAdapter(Context context, ArrayList<Carpet> itemsData) {
         this.mShoppingData = itemsData;
@@ -51,10 +52,12 @@ public class CarpetAdapter
         holder.bindTo(currentItem);
 
 
-        if(holder.getAdapterPosition() > lastPosition) {
+
+
+        if(holder.getAbsoluteAdapterPosition() > lastPosition) {
             Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.slide_in_row);
             holder.itemView.startAnimation(animation);
-            lastPosition = holder.getAdapterPosition();
+            lastPosition = holder.getAbsoluteAdapterPosition();
         }
     }
 
@@ -108,6 +111,7 @@ public class CarpetAdapter
         private TextView carpetDescription;
         private TextView price;
         private TextView count;
+        private TextView bought;
         private ImageView mCarpetImage;
 
         ViewHolder(View itemView) {
@@ -129,11 +133,22 @@ public class CarpetAdapter
             carpetDescription.setText("Type: "+currentCarpet.getType()+"\nColor: "+currentCarpet.getColor()+"\nDimensions: "+currentCarpet.getWidth()+"cm x "+currentCarpet.getLength()+"cm");
             price.setText(currentCarpet.getPrice()+" EUR");
             count.setText("Avaliable: "+currentCarpet.getStock());
+            Glide.with(mContext).load(currentCarpet.getImageResource()).into(mCarpetImage);
 
-            itemView.findViewById(R.id.add_to_cart).setOnClickListener(view -> ((CarpetListActivity)mContext).updateCarpet(currentCarpet));
+            itemView.findViewById(R.id.add_to_cart).setOnClickListener(view -> {
+                try {
+                    ((CarpetListActivity)mContext).updateCarpet(currentCarpet);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                //((CarpetListActivity)mContext).queryData();
+            });
 
             // Load the images into the ImageView using the Glide library.
-            Glide.with(mContext).load(currentCarpet.getImageResource()).into(mCarpetImage);
+
+
+
+
         }
     }
     /*private class CarpetViewHolder extends RecyclerView.ViewHolder{

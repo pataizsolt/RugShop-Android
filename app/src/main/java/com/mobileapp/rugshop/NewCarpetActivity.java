@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
@@ -63,6 +65,11 @@ public class NewCarpetActivity extends AppCompatActivity {
 
     }
     public void cancel(View view) {
+        Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);
+        view.startAnimation(shake);
+
+
+
         Intent intent = new Intent(this, CarpetListActivity.class);
         startActivity(intent);
     }
@@ -112,16 +119,13 @@ public class NewCarpetActivity extends AppCompatActivity {
         mCarpets.add(new Carpet(carpetName,color,type,widthInt,lengthInt,priceInt,stockInt,2131230921));
         Log.i(LOG_TAG, "New carpet added ");
 
+        Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);
+        view.startAnimation(shake);
+    }
 
-
-
-
-
-
-
-
-
-
-
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Toast.makeText(this,"Returning to the shop...", Toast.LENGTH_LONG).show();
     }
 }
