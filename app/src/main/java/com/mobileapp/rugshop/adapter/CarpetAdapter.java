@@ -135,14 +135,7 @@ public class CarpetAdapter
             count.setText("Avaliable: "+currentCarpet.getStock());
             Glide.with(mContext).load(currentCarpet.getImageResource()).into(mCarpetImage);
 
-            itemView.findViewById(R.id.add_to_cart).setOnClickListener(view -> {
-                try {
-                    ((CarpetListActivity)mContext).updateCarpet(currentCarpet);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                //((CarpetListActivity)mContext).queryData();
-            });
+            itemView.findViewById(R.id.add_to_cart).setOnClickListener(view -> ((CarpetListActivity)mContext).updateCarpet(currentCarpet));
 
             // Load the images into the ImageView using the Glide library.
 

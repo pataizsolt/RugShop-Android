@@ -116,7 +116,7 @@ public class NewCarpetActivity extends AppCompatActivity {
         Integer priceInt = Integer.parseInt(price);
         Integer stockInt = Integer.parseInt(stock);
 
-        mCarpets.add(new Carpet(carpetName,color,type,widthInt,lengthInt,priceInt,stockInt,2131230921));
+        mCarpets.add(new Carpet(carpetName,color,type,widthInt,lengthInt,priceInt,stockInt,2131230821));
         Log.i(LOG_TAG, "New carpet added ");
 
         Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);

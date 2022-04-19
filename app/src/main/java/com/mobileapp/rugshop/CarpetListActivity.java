@@ -83,7 +83,8 @@ public class CarpetListActivity extends AppCompatActivity {
         /*TypedArray itemsImageResources = getResources().obtainTypedArray(R.array.carpets);
         for (int i = 0; i < itemsImageResources.length(); i++) {
             Log.d(LOG_TAG,itemsImageResources.getResourceId(i, 0)+" carpet"+i);
-        }*/
+        }
+        itemsImageResources.getInt(0,0);*/
         mCarpetData.clear();
 
         mCarpets.orderBy("name", Query.Direction.ASCENDING).limit(itemLimit).get().addOnSuccessListener(queryDocumentSnapshots -> {
@@ -94,11 +95,11 @@ public class CarpetListActivity extends AppCompatActivity {
             }
 
             if (mCarpetData.size() == 0) {
-                mCarpets.add(new Carpet("Antique carpet","blue/red","persian",120,200,140,3,2131230916));
-                mCarpets.add(new Carpet("Modern carpet","orange","futuristic",160,200,230,1,2131230917));
-                mCarpets.add(new Carpet("Simple carpet","khaki","basic",150,180,60,6,2131230918));
-                mCarpets.add(new Carpet("Artistic carpet","blue/white","handmade",140,200,3000,1,2131230919));
-                mCarpets.add(new Carpet("Traditional persian carpet","red","persian",130,200,400,2,2131230920));
+                mCarpets.add(new Carpet("Antique carpet","blue/red","persian",120,200,140,3,2131230816));
+                mCarpets.add(new Carpet("Modern carpet","orange","futuristic",160,200,230,1,2131230817));
+                mCarpets.add(new Carpet("Simple carpet","khaki","basic",150,180,60,6,2131230818));
+                mCarpets.add(new Carpet("Artistic carpet","blue/white","handmade",140,200,3000,1,2131230819));
+                mCarpets.add(new Carpet("Traditional persian carpet","red","persian",130,200,400,2,2131230820));
                 queryData();
 
             }
@@ -118,7 +119,7 @@ public class CarpetListActivity extends AppCompatActivity {
 
 
     }
-    public void updateCarpet(Carpet carpet) throws InterruptedException {
+    public void updateCarpet(Carpet carpet){
         mCarpets.document(carpet._getId()).update("stock", carpet.getStock()-1).addOnSuccessListener(success ->
         {
             Log.d(LOG_TAG,carpet.getName() +" bought!");
@@ -131,10 +132,10 @@ public class CarpetListActivity extends AppCompatActivity {
             Log.d(LOG_TAG, "Only 1 left of "+carpet.getName());
         }
 
-        mCarpets.document(carpet._getId()).update("soldCounter", carpet.getSoldCounter()+1).addOnFailureListener(failure ->
+        /*mCarpets.document(carpet._getId()).update("soldCounter", carpet.getSoldCounter()+1).addOnFailureListener(failure ->
         {
             Log.d(LOG_TAG,carpet.getName() +" failed to increment!");
-        });
+        });*/
         queryData();
 
     }
