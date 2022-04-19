@@ -118,6 +118,7 @@ public class CarpetListActivity extends AppCompatActivity {
         });
 
 
+
     }
     public void updateCarpet(Carpet carpet){
         mCarpets.document(carpet._getId()).update("stock", carpet.getStock()-1).addOnSuccessListener(success ->
