@@ -41,14 +41,14 @@ public class NotificationHandler {
     }
 
     public void send(String message) {
-        Intent intent = new Intent(mContext, CarpetListActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(mContext, NOTIFICATION_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        //Intent intent = new Intent(mContext, CarpetListActivity.class);
+        //PendingIntent pendingIntent = PendingIntent.getActivity(mContext, NOTIFICATION_ID, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(mContext, CHANNEL_ID)
                 .setContentTitle("RugShop")
                 .setContentText(message)
-                .setSmallIcon(R.drawable.ic_baseline_shopping_cart_24)
-                .setContentIntent(pendingIntent);
+                .setSmallIcon(R.drawable.ic_baseline_shopping_cart_24);
+                //.setContentIntent(pendingIntent);
 
         mNotifyManager.notify(NOTIFICATION_ID, builder.build());
     }
