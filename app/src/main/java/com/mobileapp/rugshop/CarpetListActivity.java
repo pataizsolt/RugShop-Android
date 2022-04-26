@@ -36,8 +36,7 @@ public class CarpetListActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private ArrayList<Carpet> mCarpetData;
     private CarpetAdapter mAdapter;
-    private Integer itemLimit = 5;
-    private boolean bestsellerOrNah = false;
+    private Integer itemLimit = 6;
 
 
 
@@ -80,11 +79,11 @@ public class CarpetListActivity extends AppCompatActivity {
     }
 
     public void queryData(){
-        /*TypedArray itemsImageResources = getResources().obtainTypedArray(R.array.carpets);
+        int[] imageArray = new int[6];
+        TypedArray itemsImageResources = getResources().obtainTypedArray(R.array.carpets);
         for (int i = 0; i < itemsImageResources.length(); i++) {
-            Log.d(LOG_TAG,itemsImageResources.getResourceId(i, 0)+" carpet"+i);
+            imageArray[i] = itemsImageResources.getResourceId(i, 0);
         }
-        itemsImageResources.getInt(0,0);*/
         mCarpetData.clear();
 
         mCarpets.orderBy("name", Query.Direction.ASCENDING).limit(itemLimit).get().addOnSuccessListener(queryDocumentSnapshots -> {
@@ -132,11 +131,6 @@ public class CarpetListActivity extends AppCompatActivity {
             mNotificationHandler.send("Only 1 left of "+carpet.getName()+"! Get it now before it runs out!");
             Log.d(LOG_TAG, "Only 1 left of "+carpet.getName());
         }
-
-        /*mCarpets.document(carpet._getId()).update("soldCounter", carpet.getSoldCounter()+1).addOnFailureListener(failure ->
-        {
-            Log.d(LOG_TAG,carpet.getName() +" failed to increment!");
-        });*/
         queryData();
 
     }
