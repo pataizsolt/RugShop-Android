@@ -94,11 +94,11 @@ public class CarpetListActivity extends AppCompatActivity {
             }
 
             if (mCarpetData.size() == 0) {
-                mCarpets.add(new Carpet("Antique carpet","blue/red","persian",120,200,140,3,2131230816));
-                mCarpets.add(new Carpet("Modern carpet","orange","futuristic",160,200,230,1,2131230817));
-                mCarpets.add(new Carpet("Simple carpet","khaki","basic",150,180,60,6,2131230818));
-                mCarpets.add(new Carpet("Artistic carpet","blue/white","handmade",140,200,3000,1,2131230819));
-                mCarpets.add(new Carpet("Traditional persian carpet","red","persian",130,200,400,2,2131230820));
+                mCarpets.add(new Carpet("Antique carpet","blue/red","persian",120,200,140,3,imageArray[0]));
+                mCarpets.add(new Carpet("Modern carpet","orange","futuristic",160,200,230,1,imageArray[1]));
+                mCarpets.add(new Carpet("Simple carpet","khaki","basic",150,180,60,6,imageArray[2]));
+                mCarpets.add(new Carpet("Artistic carpet","blue/white","handmade",140,200,3000,1,imageArray[3]));
+                mCarpets.add(new Carpet("Traditional persian carpet","red","persian",130,200,400,2,imageArray[4]));
                 queryData();
 
             }

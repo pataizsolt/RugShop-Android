@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -116,7 +117,13 @@ public class NewCarpetActivity extends AppCompatActivity {
         Integer priceInt = Integer.parseInt(price);
         Integer stockInt = Integer.parseInt(stock);
 
-        mCarpets.add(new Carpet(carpetName,color,type,widthInt,lengthInt,priceInt,stockInt,2131230821));
+        int[] imageArray = new int[6];
+        TypedArray itemsImageResources = getResources().obtainTypedArray(R.array.carpets);
+        for (int i = 0; i < itemsImageResources.length(); i++) {
+            imageArray[i] = itemsImageResources.getResourceId(i, 0);
+        }
+
+        mCarpets.add(new Carpet(carpetName,color,type,widthInt,lengthInt,priceInt,stockInt,imageArray[5]));
         Log.i(LOG_TAG, "New carpet added ");
 
         Animation shake = AnimationUtils.loadAnimation(this, R.anim.shake);
